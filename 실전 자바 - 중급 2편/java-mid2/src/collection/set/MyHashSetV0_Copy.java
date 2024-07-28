@@ -20,7 +20,7 @@ public class MyHashSetV0_Copy {
     // O(n)
     public boolean contains(int value) {
         for (int data : elementData) {
-            if(data == value) {
+            if (data == value) {
                 return true;
             }
         }
