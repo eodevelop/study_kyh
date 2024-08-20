@@ -9,13 +9,14 @@ import hello.core.member.MemoryMemberRepository;
 
 public class OrderServiceImpl implements OrderService{
 
-    private final MemberRepository memberRepository = new MemoryMemberRepository();
-    // 이 부분을 안고치고 변경 가능하게 하려면?
-    // 인터페이스의 구현 부분을 특정 클래스에 의존하는 코드가 여기에 있으면 안된다.
-    // DIP를 위반한것. 결국 인터페이스에만 의존해야한다.
-    // private final DiscountPolicy discountPolicy = new FixDiscountPolicy();
-    // 이 문제를 해결하기 위해선 누군가 대신 discountPolicy를 생성해서 주입해줘야 한다.
-    private final DiscountPolicy discountPolicy = new RateDiscountPolicy();
+    private final MemberRepository memberRepository;
+    private final DiscountPolicy discountPolicy ;
+
+    // 구체적인 클래스에 대해서 전혀 모르게 되고, 이런 방식을 통해서 OCP와 DIP를 지킬 수 있게된다.
+    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+        this.memberRepository = memberRepository;
+        this.discountPolicy = discountPolicy;
+    }
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
