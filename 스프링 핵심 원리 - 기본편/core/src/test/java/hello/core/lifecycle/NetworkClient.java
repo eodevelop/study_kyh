@@ -1,5 +1,8 @@
 package hello.core.lifecycle;
 
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
+
 public class NetworkClient {
 
     private String url;
@@ -44,12 +47,17 @@ public class NetworkClient {
         disconnect();
     }
 
+    // Spring 에서 권장 하는 방식 해당 방식을 사용하면 된다.
+    // 어노테이션만 붙이면 되서 편리하고, 스프링에 종속적인 기술이 아니라 자바 표준에 포함되어 있어서 다른 컨테이너에서도 동작한다.
+    // 컴포넌트 스캔과도 잘 어울린다.
+    @PostConstruct
     public void init() throws Exception {
         System.out.println("NetworkClient.init");
         connect();
         call("초기화 연결 메시지");
     }
 
+    @PreDestroy
     public void close() throws Exception {
         System.out.println("NetworkClient.close");
         disconnect();
