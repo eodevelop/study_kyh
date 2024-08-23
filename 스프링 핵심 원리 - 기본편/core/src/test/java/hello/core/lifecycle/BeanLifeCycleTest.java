@@ -17,7 +17,11 @@ public class BeanLifeCycleTest {
     @Configuration
     static class LifCycleConfig {
 
-        @Bean
+        @Bean(initMethod = "init", destroyMethod = "close")
+        // 속성방식의 장점은 코드가 아니라 설정 정보를 사용하기 때문에 외부라이브러리에도 초기화, 종료 메소드를 적용할 수 있다.
+        // Bean 으로 사용할 때 destroyMethod 에는 특별한 기능이 하나 있다.
+        // 이 기능은 기본 메소드의 Default 가 (inferred) 로 들어 있는데
+        // 이때 클래스 안에 close, shutdown 과 같은 이름의 메소드가 있다면 자동으로 등록해서 종료해준다.
         public NetworkClient networkClient() {
             NetworkClient networkClient = new NetworkClient();
             // 개발자는 의존 관계 주입의 완료 시점을 알 수 없다.

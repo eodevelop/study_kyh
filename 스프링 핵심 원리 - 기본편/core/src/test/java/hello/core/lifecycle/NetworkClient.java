@@ -1,9 +1,6 @@
 package hello.core.lifecycle;
 
-import org.springframework.beans.factory.DisposableBean;
-import org.springframework.beans.factory.InitializingBean;
-
-public class NetworkClient implements InitializingBean, DisposableBean {
+public class NetworkClient {
 
     private String url;
 
@@ -34,16 +31,27 @@ public class NetworkClient implements InitializingBean, DisposableBean {
     // 초기화, 소멸 메소드의 이름도 변경 불가
     // 그리고 내가 변경할 수 없는 외부 라이브러리에 적용할 수 없다.
     // 현재는 잘 사용되지 않는 방식
-    @Override
+//    @Override
     public void afterPropertiesSet() throws Exception {
         System.out.println("NetworkClient.afterPropertiesSet");
         connect();
         call("초기화 연결 메시지");
     }
 
-    @Override
+//    @Override
     public void destroy() throws Exception {
         System.out.println("NetworkClient.destroy");
+        disconnect();
+    }
+
+    public void init() throws Exception {
+        System.out.println("NetworkClient.init");
+        connect();
+        call("초기화 연결 메시지");
+    }
+
+    public void close() throws Exception {
+        System.out.println("NetworkClient.close");
         disconnect();
     }
 }
