@@ -4,6 +4,7 @@ import hello.advanced.trace.TraceStatus;
 import hello.advanced.trace.hellotrace.HelloTraceV2;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -14,7 +15,7 @@ public class OrderControllerV2 {
     private final HelloTraceV2 trace;
 
     @GetMapping("/v2/request")
-    public String request(String itemId) {
+    public String request(@RequestParam("itemId") String itemId) {
         TraceStatus status = null;
         try {
             status = trace.begin("OrderController.request()");
