@@ -4,7 +4,7 @@
 
 - IP 위에 TCP를 올려서 보완해준다.
 - 하나씩 포장해 가면서 패킷이 완성됨
-  ![img.png](프로토콜 계층.png)
+  ![img.png](04P_프로토콜 계층.png)
 - TCP/IP 패킷 정보
     - 출발지 IP, 목적지 IP, 기타..
     - TCP 정보
@@ -17,7 +17,7 @@
     - 신뢰할 수 있는 프로토콜
     - 현재는 대부분 TCP를 사용한다.
 - TCP 3 way handshake
-  ![img_1.png](TCP3WayHandshake.png)
+  ![img_1.png](04P_TCP3WayHandshake.png)
     - 서버와 클라이언트가 서로 연결을 맺을 때 사용하는 방법
     - 클라이언트가 Syn을 보내면 서버는 Syn, Ack로 응답하고, 클라이언트는 Ack를 보내면 연결이 완료된다.
 - 데이터 전달 보증
